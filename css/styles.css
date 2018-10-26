@@ -1,0 +1,37 @@
+/* Start utilities */
+/* 
+	NOTE: This naming convention is being used to match current Bootstrap (v4) documentation, 
+			as well as to facilitate easy migration to SASS per https://getbootstrap.com/docs/4.1/utilities/spacing/
+ */
+.p-20 {
+	padding: 20px;
+}
+
+.pt-20 {
+	padding-top: 20px;
+}
+
+.pb-20 {
+	padding-bottom: 20px;
+}
+/* End utilities */
+
+.outer-container {
+	background-color: #DCDCDC;
+}
+
+.main-heading {
+	color: #738F7B;
+	font-weight: 600;
+}
+
+/* Start tables */
+.table-striped tbody tr:nth-of-type(odd) {
+	background-color: #738F7B;
+}
+
+.table-striped tbody tr:nth-of-type(even),
+.custom-dropdown {
+	background-color: #fff;
+}
+/* End tables */

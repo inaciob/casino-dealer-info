@@ -1,0 +1,51 @@
+<!doctype html>
+<html ng-app="casinoData">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width">
+	<title>ARB Labs pre-interview test - Brian Inacio</title>
+	<!-- Bootstrap CDN -->
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+	<link rel="stylesheet" type="text/css" href="css/styles.css">
+</head>
+<body ng-controller="DealerInfoCtrl as dealerInfoCtrl" class="outer-container">
+	<div class="container p-20">
+		<h1 class="main-heading pb-20 text-center">Dealer Info</h1>
+			
+		<select ng-init="selectedFile = null" 
+				ng-model="selectedFile" 
+				ng-options="file.displayText for file in dealerInfoCtrl.files track by file.filename"
+				ng-change="dealerInfoCtrl.toggleData(selectedFile)" 
+				class="custom-dropdown">
+				<option value="">-- Please Select --</option>
+		</select>
+
+		<div class="pt-20">
+			<p ng-if="!selectedFile" class="info">Select the dealer info you would like to see</p>
+
+			<div class="table-responsive">
+				<table ng-if="selectedFile" class="table table-striped">
+					<thead class="thead-dark">
+				    	<tr>
+				      		<th ng-repeat="(key, value) in dealerInfoCtrl.dataToDisplay[0]" scope="col">{{ key }}</th>
+				    	</tr>
+				  	</thead>
+				  	<tbody>
+				    	<tr ng-repeat="dealer in dealerInfoCtrl.dataToDisplay track by $index">
+							<th ng-if="selectedFile.filename == 'dealer_log_2'" scope="row">{{ dealer['Employee ID'] }}</th>
+							<th ng-if="selectedFile.filename == 'dealer_ranking_2'" scope="row">{{ dealer['Dealer ID'] }}</th>
+
+							<td ng-if="selectedFile.filename == 'dealer_log_2' && innerKey != 'Employee ID'" ng-repeat="(innerKey, innerValue) in dealerInfoCtrl.dataToDisplay[$index]">{{ innerValue }}</td>
+							<td ng-if="selectedFile.filename == 'dealer_ranking_2' && innerKey != 'Dealer ID'" ng-repeat="(innerKey, innerValue) in dealerInfoCtrl.dataToDisplay[$index]">{{ innerValue }}</td>
+						</tr>
+				  	</tbody>
+				</table>
+			</div>
+		</div>
+	</div>
+
+	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.7.5/angular.min.js"></script>
+	<script src="http://cdnjs.cloudflare.com/ajax/libs/socket.io/0.9.16/socket.io.min.js"></script>
+	<script src="app/app.controller.js"></script>
+</body>
+</html>
